@@ -1,9 +1,10 @@
-import { galleryItems } from './gallery-items.js';
+import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-const galleryContainer = document.querySelector('.gallery');
+const galleryContainer = document.querySelector(".gallery");
 
-const galleryMarkup = galleryItems.map(({ preview, original, description }) => {
+const galleryMarkup = galleryItems
+  .map(({ preview, original, description }) => {
     return `
       <li class="gallery__item">
         <a class="gallery__link" href="${original}">
@@ -16,25 +17,26 @@ const galleryMarkup = galleryItems.map(({ preview, original, description }) => {
         </a>
       </li>
     `;
-  }).join('');
-  
-  galleryContainer.insertAdjacentHTML('beforeend', galleryMarkup);
+  })
+  .join("");
 
-  galleryContainer.addEventListener('click', itemClick);
+galleryContainer.insertAdjacentHTML("beforeend", galleryMarkup);
 
-  function itemClick(event) {
-    event.preventDefault();
+galleryContainer.addEventListener("click", itemClick);
 
-    const target = event.target;
+function itemClick(event) {
+  event.preventDefault();
 
-    if (target.classList.contains('gallery__image')) {
-        const originalUrl = target.dataset.source;
-        const description = target.alt;
+  const target = event.target;
 
-        const lightboxContent = `<img src="${originalUrl}" alt="${description}" width="800" height="600">`;
+  if (target.classList.contains("gallery__image")) {
+    const originalUrl = target.dataset.source;
+    const description = target.alt;
 
-        const modal = basicLightbox.create(lightboxContent);
+    const lightboxContent = `<img src="${originalUrl}" alt="${description}" width="800" height="600">`;
 
-        modal.show();
-    }
-};
+    const modal = basicLightbox.create(lightboxContent);
+
+    modal.show();
+  }
+}
